@@ -1,0 +1,20 @@
+version: "2"
+
+services:
+  kafkaserver:
+    image: hklabs/kafka:latest
+    container_name: kafka
+    hostname: kafkaserver
+    networks:
+      - kafkanet
+    ports:
+      - 2181:2181
+      - 9092:9092
+    environment:
+      ADVERTISED_HOST: kafkaserver
+      ADVERTISED_PORT: 9092
+      KAFKA_CREATE_TOPICS: remote-matches:10:1
+
+networks:
+  kafkanet:
+    driver: bridge
